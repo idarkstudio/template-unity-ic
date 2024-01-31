@@ -50,7 +50,7 @@ npm start
 
 Which will start a server at `http://localhost:8080`, proxying API requests to the replica at port 4943.
 
-## Running the project locally
+## Configuring the project
 By default, the loader will not load, that's because the target URL is set to nothing, so it has nothing to load to, to make it load to the desired URL, simply modify the URL variable located on the App.jsx file (Line 12).
 
 ```bash
