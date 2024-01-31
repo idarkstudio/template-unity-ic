@@ -50,6 +50,14 @@ npm start
 
 Which will start a server at `http://localhost:8080`, proxying API requests to the replica at port 4943.
 
+## Running the project locally
+By default, the loader will not load, that's because the target URL is set to nothing, so it has nothing to load to, to make it load to the desired URL, simply modify the URL variable located on the App.jsx file (Line 12).
+
+```bash
+const URL = "{YOUR_URL_HERE}"
+```
+
+
 ### Note on frontend environment variables
 
 If you are hosting frontend code somewhere without using DFX, you may need to make one of the following adjustments to ensure your project does not fetch the root key in production:
