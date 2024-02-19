@@ -9,18 +9,18 @@ import { isMobile, isTablet } from "react-device-detect";
 import Loader2 from "./components/Loader2";
 import useNfts from "./hook/useNfts";
 
-const URL = "";
+const URL = "https://play.realityofmadness.com/test-sdk";
 
 
 
 const unityOptions = {
-    loaderUrl: URL + "/.loader.js",
-  dataUrl: URL + "/.data",
-  frameworkUrl: URL + "/.framework.js",
-  codeUrl: URL + "/.wasm",
-  productName: "",
+    loaderUrl: URL + "/sdk_test.loader.js",
+  dataUrl: URL + "/sdk_test.data",
+  frameworkUrl: URL + "/sdk_test.framework.js",
+  codeUrl: URL + "/sdk_test.wasm",
+  productName: "sdk_test",
   productVersion: "0.0.1",
-  companyName: "",
+  companyName: "test-sdk",
 };
 
 const App = () => {
@@ -47,10 +47,10 @@ const App = () => {
   const handleRequestNFTs = async () => {
     const nfts = await allNfts(isConnected, principal);
     console.log({ nfts, isLoaded });
-    sendMessage("nftManager", "RequestNFT", JSON.stringify(nfts));
+    sendMessage("LoginManager", "RequestNFT", JSON.stringify(nfts));
   };
 
-  const handleLogin = async () => {
+  const handleLoginIc = async () => {
     handleExitFullscreen();
     setInitLogin(true);
     console.log("entra login");
@@ -59,49 +59,49 @@ const App = () => {
     open();
   };
 
-  // // listeners
-  //  //useEffect(() => {
-  //   // login
-  //    // addEventListener("Login", handleLogin);
+  // listeners
+   useEffect(() => {
+    // login
+     addEventListener("LoginIc", handleLoginIc);
 
-  //   // request nfts
-  //    //addEventListener("GetNFT", handleRequestNFTs);
+    // request nfts
+     addEventListener("GetNFT", handleRequestNFTs);
 
-  //   return () => {
-  //     removeEventListener("Login", allNfts);
-  //     removeEventListener("GetNFT", handleRequestNFTs);
-  //   };
-  // }, [addEventListener, isLoaded, principal]);
+    return () => {
+      removeEventListener("LoginIc", handleLoginIc);
+      removeEventListener("GetNFT", handleRequestNFTs);
+    };
+  }, [addEventListener, isLoaded, principal]);
 
   // setters
-  useEffect(() => {
-    if (isLoaded) {
-      // set platform in game
-      sendMessage("DontDestroyOnLoad", "CheckMobilePlatform", isMobile || isTablet ? 1 : 0);
+  // useEffect(() => {
+  //   if (isLoaded) {
+  //     // set platform in game
+  //     sendMessage("DontDestroyOnLoad", "CheckMobilePlatform", isMobile || isTablet ? 1 : 0);
 
-      // set location in game
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            const region = currentRegion(latitude, longitude);
-            console.log({ region });
-            sendMessage("locationManager", "RequestLocation", region);
-          },
-          (error) => console.error("Error al obtener la ubicación:", error.message)
-        );
-      } else {
-        console.error("La geolocalización no está disponible en este navegador.");
-      }
-    }
-  }, [isLoaded]);
+  //     // set location in game
+  //     // if (navigator.geolocation) {
+  //     //   navigator.geolocation.getCurrentPosition(
+  //     //     (position) => {
+  //     //       const { latitude, longitude } = position.coords;
+  //     //       const region = currentRegion(latitude, longitude);
+  //     //       console.log({ region });
+  //     //       sendMessage("locationManager", "RequestLocation", region);
+  //     //     },
+  //     //     (error) => console.error("Error al obtener la ubicación:", error.message)
+  //     //   );
+  //     // } else {
+  //     //   console.error("La geolocalización no está disponible en este navegador.");
+  //     // }
+  //   }
+  // }, [isLoaded]);
 
   // set principal in game
   useEffect(() => {
     console.log("prnicipal useEffect");
     if (isLoaded && isConnected && principal && initLogin) {
       console.log("envia principal");
-      sendMessage("loginManager", "GetPrincipal", principal);
+      sendMessage("LoginManager", "GetPrincipal", principal);
       findOrCreateUser(db_users, principal);
     }
   }, [isLoaded, isConnected, principal]);
