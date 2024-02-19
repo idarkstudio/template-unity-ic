@@ -14,10 +14,7 @@ export const canisters = {
 };
 
 export const canisterIds = [
-  "v4xh6-viaaa-aaaap-qbboq-cai", // db_users
-  "v3wbk-yqaaa-aaaap-qbboa-cai", // baby dragon nft
-  "5btbh-2aaaa-aaaap-aaqga-cai", // genesis nft
-  "fvsni-daaaa-aaaah-adlzq-cai", // purple legion nft
-  // "srggp-uqaaa-aaaag-qaxua-cai", // hallow end nft
-  // "", // dark infinity nft
+  "v4xh6-viaaa-aaaap-qbboq-cai" // db_users
+
+
 ];
