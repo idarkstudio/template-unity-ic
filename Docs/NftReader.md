@@ -4,10 +4,19 @@
 Firstly, it's important to note that NFTs don't follow the same standard. Therefore, we'll need two things: knowing the IDLs of the specific NFT and identifying which functions of the canister are relevant. To address both aspects, we will use ICSscan.
 
 ## Step 1:
-Navigate to ICSscan and obtain the IDLs. Add them to the "idls" folder.
+Navigate to ![IcScan](https://icscan.io) and obtain the IDLs. Add them to the "idls" folder.
 
 ## Step 2:
-Add our canister ID to the "canisters" file. In the "linked" object, include the IDLFactory with our IDLs file.
+Add our canister ID to the "canisters" file. In the "linked" object, include the IDLFactory with our IDLs ![folder](../src/frontend/src/utils/idls/Users.js).
+``` bash
+src
+└── frontend
+    └── src
+        └── utils
+            └── idls
+                ├── Users.js
+                └── Yumi.js
+```
 
 ## Step 3
 
@@ -26,23 +35,22 @@ Additionally, within ![useNft.js](../src/frontend/src/hook/useNfts.js), by lever
     if (!isConnected || !principal) return [];
   
     const genesis = await getGenesisNFTs(principal);
-    const all = [...genesis]; 
+    const all = [...genesis]; // add the genesis array to all
     return all;
 
   };
+};
 ```
 
-
-for example if i want to know if a principal has the genesis collection I use :
+for example if I want to know if a principal has the genesis collection I would use :
 ```js
  const getGenesisNFTs = async (principal) => {
-    console.log("entra getGenesisNFTs");
 
     try {
       const registry = await genesis.getRegistry();
       console.log({ registry });
 
-      // TODO principal
+      
       const tokensId = registry
         .filter(
           (a) =>
@@ -86,3 +94,5 @@ It is important that the NFT object is structured as follows:
     collection: ,
  }
  ```
+
+ The function all nft will be called in the ![App.jsx](../src/frontend/src/App.jsx) once the user is logged in.

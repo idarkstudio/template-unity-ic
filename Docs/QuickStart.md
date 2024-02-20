@@ -21,7 +21,18 @@ A. First, you need to create your frontend canister because you require the cani
  dfx canister create frontend --network ic 
   ```
 
-This command will return something like this: "https://ecajd-kiaaa-aaaam-ab7jq-cai.icp0.io/". Make sure to save this ID.
+This command will return something like this: "ecajd-kiaaa-aaaam-ab7jq-cai".Also this will generate a fil ".json" like this 
+![canister_ids.json](image-1.png)
+this file will be like this:
+```json
+{
+  "frontend": {
+    "ic": "ecajd-kiaaa-aaaam-ab7jq-cai"
+  }
+}
+
+``` 
+ Make sure to save this ID.
 
 B. Insert your ID in the 
 ![Index](../src/frontend/src/index.jsx)
@@ -32,7 +43,8 @@ const client = createClient({
   globalProviderConfig: {
     whitelist: canisterIds,
     appName: "",
-    host: "https://ecajd-kiaaa-aaaam-ab7jq-cai.icp0.io/",// Replace your URL here
+    // host: "https://ecajd-kiaaa-aaaam-ab7jq-cai.icp0.io/",this would be mine 
+    host: "https://.icp0.io/",// put your id in the middle of https:// and .icp0
     dev: false,
     autoConnect: false,
   },
