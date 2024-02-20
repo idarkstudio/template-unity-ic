@@ -1,0 +1,5 @@
+// Version: 1.0.0
+type User = {alias : Text; principalId : Principal; urlImage : Text};
+actor {
+  stable var arrUsers : [(Principal, User)]
+};

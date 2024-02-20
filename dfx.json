@@ -6,6 +6,10 @@
       },
       "source": ["src/frontend/assets", "dist/"],
       "type": "assets"
+    },
+    "users": {
+      "main": "src/db_users/main.mo",
+      "type": "motoko"
     }
   },
   "output_env_file": ".env",

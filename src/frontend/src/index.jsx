@@ -16,7 +16,7 @@ const client = createClient({
   globalProviderConfig: {
     whitelist: canisterIds,
     appName: "",
-    host: "localhost:8080",
+    host: "https://ecajd-kiaaa-aaaam-ab7jq-cai.icp0.io/",
     dev: false,
     autoConnect: false,
   },

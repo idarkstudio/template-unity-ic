@@ -1,0 +1,25 @@
+type User = 
+ record {
+   alias: text;
+   principalId: principal;
+   urlImage: text;
+ };
+type Result_1 = 
+ variant {
+   err: text;
+   ok: bool;
+ };
+type Result = 
+ variant {
+   err: text;
+   ok: User;
+ };
+service : {
+  SetAlias: (principal, text) -> (Result_1);
+  createUser: (principal) -> (Result);
+  findOrCreateUser: (principal) -> (User);
+  getAllUsers: () -> (vec User) query;
+  getUser: (principal) -> (Result) query;
+  getUserByAlias: (text) -> (Result) query;
+  totalUsers: () -> (nat) query;
+}

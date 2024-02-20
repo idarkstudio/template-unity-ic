@@ -1,23 +1,19 @@
-import "./App.css";
-
-import { ConnectDialog, useCanister, useConnect, useDialog } from "@connect2ic/react";
 import React, { useEffect, useRef, useState } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
-import { currentRegion, findOrCreateUser } from "./utils/functions";
+import { ConnectDialog, useCanister, useConnect, useDialog } from "@connect2ic/react";
 import { isMobile, isTablet } from "react-device-detect";
 
 import Loader2 from "./components/Loader2";
 import useNfts from "./hook/useNfts";
+import { currentRegion, findOrCreateUser } from "./utils/functions";
 
-const URL = "https://play.realityofmadness.com/test-sdk";
-
-
+const URL = ""; // Unity files URL
 
 const unityOptions = {
-    loaderUrl: URL + "/sdk_test.loader.js",
-  dataUrl: URL + "/sdk_test.data",
-  frameworkUrl: URL + "/sdk_test.framework.js",
-  codeUrl: URL + "/sdk_test.wasm",
+  loaderUrl: URL + "/.js",
+  dataUrl: URL + "/.data",
+  frameworkUrl: URL + "/.framework.js",
+  codeUrl: URL + "/.wasm",
   productName: "sdk_test",
   productVersion: "0.0.1",
   companyName: "test-sdk",
@@ -33,11 +29,12 @@ const App = () => {
     removeEventListener,
   } = useUnityContext(unityOptions);
   const { open, isOpen } = useDialog();
-  const [db_users] = useCanister("db_users", { mode: "anonymous" });
   const { isConnected, principal, disconnect } = useConnect({
     onConnect: () => findOrCreateUser(db_users, principal),
   });
   const { allNfts } = useNfts();
+  const [db_users] = useCanister("db_users", { mode: "anonymous" });
+
   const [initLogin, setInitLogin] = useState(false);
   const ref = useRef();
 
@@ -45,69 +42,59 @@ const App = () => {
   const handleExitFullscreen = () => document.fullscreenElement && document.exitFullscreen();
 
   const handleRequestNFTs = async () => {
+    console.log("In handleRequestNFTs");
     const nfts = await allNfts(isConnected, principal);
-    console.log({ nfts, isLoaded });
-    sendMessage("LoginManager", "RequestNFT", JSON.stringify(nfts));
+    sendMessage("ICPrefab", "RequestNFT", JSON.stringify(nfts));
   };
 
   const handleLoginIc = async () => {
     handleExitFullscreen();
     setInitLogin(true);
-    console.log("entra login");
-    console.log({ isConnected, principal });
     isConnected && disconnect();
     open();
   };
 
-  // listeners
-   useEffect(() => {
-    // login
-     addEventListener("LoginIc", handleLoginIc);
-
-    // request nfts
-     addEventListener("GetNFT", handleRequestNFTs);
+  // Event listeners
+  useEffect(() => {
+    addEventListener("LoginIc", handleLoginIc);
+    addEventListener("GetNFT", handleRequestNFTs);
 
     return () => {
       removeEventListener("LoginIc", handleLoginIc);
       removeEventListener("GetNFT", handleRequestNFTs);
     };
-  }, [addEventListener, isLoaded, principal]);
+  }, [addEventListener]);
 
-  // setters
-  // useEffect(() => {
-  //   if (isLoaded) {
-  //     // set platform in game
-  //     sendMessage("DontDestroyOnLoad", "CheckMobilePlatform", isMobile || isTablet ? 1 : 0);
-
-  //     // set location in game
-  //     // if (navigator.geolocation) {
-  //     //   navigator.geolocation.getCurrentPosition(
-  //     //     (position) => {
-  //     //       const { latitude, longitude } = position.coords;
-  //     //       const region = currentRegion(latitude, longitude);
-  //     //       console.log({ region });
-  //     //       sendMessage("locationManager", "RequestLocation", region);
-  //     //     },
-  //     //     (error) => console.error("Error al obtener la ubicación:", error.message)
-  //     //   );
-  //     // } else {
-  //     //   console.error("La geolocalización no está disponible en este navegador.");
-  //     // }
-  //   }
-  // }, [isLoaded]);
-
-  // set principal in game
+  // Setter
   useEffect(() => {
-    console.log("prnicipal useEffect");
+    if (isLoaded) {
+      sendMessage("ICPrefab", "IsMobileTrue", isMobile || isTablet ? 1 : 0);
+    }
+  }, [isLoaded]);
+
+  // Set principal in game
+  useEffect(() => {
     if (isLoaded && isConnected && principal && initLogin) {
-      console.log("envia principal");
-      sendMessage("LoginManager", "GetPrincipal", principal);
-      findOrCreateUser(db_users, principal);
+      const User = {
+        principal: principal.toString(),
+        userName: null
+      }
+
+      try {
+        const alias = findOrCreateUser(db_users, principal);
+        User.userName = alias
+      } catch (e) {
+        console.log("Error in findOrCreateUser: " + e);
+      } finally {
+        sendMessage("ICPrefab", "GetPrincipal", JSON.stringify(User));
+      }
     }
   }, [isLoaded, isConnected, principal]);
 
+  // UI effects
   useEffect(() => {
     if (isOpen) {
+      // Modify styles when the dialog is open
       const btnBitfinity = document.querySelector(".infinity-styles");
       const span = btnBitfinity?.querySelector(".button-label");
       span && (span.textContent = "Bitfinity Wallet");
@@ -125,7 +112,6 @@ const App = () => {
     <main>
       {!isLoaded && <Loader2 loadingProgression={loadingProgression} />}
 
-      {/* full screen */}
       {!document.fullscreenElement && (
         <div
           style={{
@@ -137,6 +123,7 @@ const App = () => {
           onClick={handleRequestFullscreen}
         ></div>
       )}
+
       <Unity
         ref={ref}
         unityProvider={unityProvider}

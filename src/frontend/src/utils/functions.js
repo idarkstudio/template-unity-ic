@@ -21,10 +21,19 @@ export const findOrCreateUser = async (db_users, principal) => {
   console.log({ db_users, principal });
   try {
     const find = await db_users.getUser(p(principal));
-    if (find.ok) return console.log(find.ok);
+    if (find.ok){
+
+      return find.ok.alias;
+    } 
+      
 
     const create = await db_users.createUser(p(principal));
-    if (create.ok) return console.log(create.ok);
+    if (create.ok) {
+      console.log(create.ok);
+      return create.ok.alias
+      
+    } 
+
   } catch (err) {
     console.log("findOrCreateUser error:", err);
   }
