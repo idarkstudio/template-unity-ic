@@ -34,13 +34,13 @@ const unityOptions = {
 ### C. Ensure File Names Match
 It is essential that the file names of the Unity build match the location specified in the URL directory. This will ensure that the application can properly load the build.
 
-![files names](image.png)
+[files names](image.png)
 For example, in this case, you should have a folder in your domain called "Unity-build" and then the names of the files should match those in your code.
 
 
 ## step 2: Add your canisters Id in the proyect.
 
-# A- First, you need to create your frontend canister because you require the canister ID before deployment:
+### A- First, you need to create your frontend canister because you require the canister ID before deployment:
  ```bash
  dfx canister create frontend --network ic 
   ``` 
@@ -50,7 +50,7 @@ dfx canister create users --network ic
 (make sure that your canisters names are the same)
 
 This command will return something like this: "ecajd-kiaaa-aaaam-ab7jq-cai".Also this will generate a fil ".json" like this 
-![canister_ids.json](image-1.png)
+[canister_ids.json](image-1.png)
 this file will be like this:
 ```json
 {
@@ -66,7 +66,7 @@ this file will be like this:
  Make sure to save your IDs.
 
 # B- Insert your Frontend.
-Go to the ![Index](../src/frontend/src/index.jsx) and change the Const Client with your id
+Go to the [Index](../src/frontend/src/index.jsx) and change the Const Client with your id
 ```js 
 const client = createClient({
   canisters,
@@ -84,7 +84,7 @@ const client = createClient({
 This will enable you to execute some POST methods on the Mainnet.
 
 # C- Insert your DataBase.
-Go to the ![canisters file](../src/frontend/src/utils/canisters.js).
+Go to the [canisters file](../src/frontend/src/utils/canisters.js).
 ``` bash
 src
 └── frontend
