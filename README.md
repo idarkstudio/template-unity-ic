@@ -50,7 +50,7 @@ dfx canister create users --network ic
 (make sure that your canisters names are the same)
 
 This command will return something like this: "ecajd-kiaaa-aaaam-ab7jq-cai".Also this will generate a fil ".json" like this 
-![canister_ids.json](image-1.png)
+"canister_ids.json"
 this file will be like this:
 ```json
 {
