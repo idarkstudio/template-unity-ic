@@ -2,7 +2,7 @@
 ### Project Setup Instructions
 This README provides the necessary steps to set up the project. Follow these instructions to ensure the configuration is done correctly for the entire project.
 
-- [How to configure the reeading of nfts](./Docs/NftReader.md)
+- [How to configure the reeading of NFTs](./Docs/NftReader.md)
 - [Docs about ic enviromment ](./Docs/IcDocs.md)
 
 ## Step 1: Configure Unity Build Settings
