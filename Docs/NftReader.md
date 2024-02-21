@@ -151,3 +151,6 @@ It is important that the NFT object is structured as follows:
  ```
 
  The function all nft will be called in the [App.jsx](../src/frontend/src/App.jsx) once the user is logged in.
+
+#
+## Coming soon, the template will feature token reading capabilities and the option to change the name in the database.
