@@ -12,6 +12,7 @@ In my case the canister id of this collection is :
 ```bash
 5btbh-2aaaa-aaaap-aaqga-cai 
 ```
+
 ## Step 2: Get the idl file.
 
 ### A- Go to [IcScan](https://icscan.io) and search the canister Id from your collection.
