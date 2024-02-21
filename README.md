@@ -34,7 +34,7 @@ const unityOptions = {
 ### C. Ensure File Names Match
 It is essential that the file names of the Unity build match the location specified in the URL directory. This will ensure that the application can properly load the build.
 
-[files names](image.png)
+![files names](/Docs/image.png)
 For example, in this case, you should have a folder in your domain called "Unity-build" and then the names of the files should match those in your code.
 
 
