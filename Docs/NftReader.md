@@ -4,10 +4,10 @@
 Firstly, it's important to note that NFTs don't follow the same standard. Therefore, we'll need two things: knowing the IDLs of the specific NFT and identifying which functions of the canister are relevant. To address both aspects, we will use ICSscan.
 
 ## Step 1: Get the canister id .
-Navigate to ![NftGeek](https://t5t44-naaaa-aaaah-qcutq-cai.raw.ic0.app), search the specific collection of the nft that you want and save the canister id.
+Navigate to [NftGeek](https://t5t44-naaaa-aaaah-qcutq-cai.raw.ic0.app), search the specific collection of the nft that you want and save the canister id.
 
 for example if I want "the genesis collection" I Would search: 
-![alt text](image-2.png)
+[alt text](image-2.png)
 In my case the canister id of this collection is : 
 ```bash
 5btbh-2aaaa-aaaap-aaqga-cai 
@@ -15,11 +15,11 @@ In my case the canister id of this collection is :
 ## Step 2: Get the idl file.
 
 ### A- Go to [IcScan](https://icscan.io) and search the canister Id from your collection.
-![alt text](image-3.png)
+[alt text](image-3.png)
 ### B-Once you search it scroll down and search the "View Did File".
-![alt text](image-4.png)
+[alt text](image-4.png)
 ### C-Select JavaScript and coppy the code.
-![alt text](image-5.png)
+[alt text](image-5.png)
 ### D- Add the code to a new idl file.
 Create a new file and coppy the script
 ``` bash
@@ -35,7 +35,7 @@ src
 ## Step 3: Add your Canister Id and the idl properties.
 
 
-### A- Go to the![canisters file](../src/frontend/src/utils/canisters.js).
+### A- Go to the[canisters file](../src/frontend/src/utils/canisters.js).
 ``` bash
 src
 └── frontend
@@ -74,7 +74,7 @@ Utilize ICSscan to identify the functions within the IDLs that provide informati
 
 It's important to note that ICSscan will be instrumental in searching for and comprehending the relevant functions in the IDLs.
 
-Additionally, within ![useNft.js](../src/frontend/src/hook/useNfts.js), by leveraging the functions from each canister (the ID of each NFT collection) and the user's principal, you should be able to access all the NFTs from that collection owned by the user. Subsequently, these NFTs should be appended to the 'All' array in 'useNfts'.
+Additionally, within [useNft.js](../src/frontend/src/hook/useNfts.js), by leveraging the functions from each canister (the ID of each NFT collection) and the user's principal, you should be able to access all the NFTs from that collection owned by the user. Subsequently, these NFTs should be appended to the 'All' array in 'useNfts'.
 ```js
  const useNfts = () => {
   const [genesis] = useCanister("genesis", { mode: "anonymous" });
@@ -145,4 +145,4 @@ It is important that the NFT object is structured as follows:
  }
  ```
 
- The function all nft will be called in the ![App.jsx](../src/frontend/src/App.jsx) once the user is logged in.
+ The function all nft will be called in the [App.jsx](../src/frontend/src/App.jsx) once the user is logged in.
