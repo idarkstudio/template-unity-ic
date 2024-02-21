@@ -65,7 +65,7 @@ this file will be like this:
 ``` 
  Make sure to save your IDs.
 
-# B- Insert your Frontend.
+### B- Insert your Frontend.
 Go to the [Index](../src/frontend/src/index.jsx) and change the Const Client with your id
 ```js 
 const client = createClient({
@@ -83,7 +83,7 @@ const client = createClient({
 ```
 This will enable you to execute some POST methods on the Mainnet.
 
-# C- Insert your DataBase.
+### C- Insert your DataBase.
 Go to the [canisters file](../src/frontend/src/utils/canisters.js).
 ``` bash
 src
