@@ -69,9 +69,13 @@ export const canisterIds = [
 ];
  ```
 
-## Step 3
+## Step 4 Get your functions.
 
-Utilize ICSscan to identify the functions within the IDLs that provide information about the NFTs owned by a principal. These functions will enable us to retrieve the NFTs owned by the principal. Once identified, implement these functions to populate our total array of NFTs, named "allNFT".
+I recommend using ICSscan to identify the functions within the IDLs that provide information about the NFTs owned by a principal. By scrolling down, you'll see all the functions of the canister. Typically, the canister will include the 'GetRegistry' function, which informs you about the existing NFTs and their owners, allowing you to filter as needed.
+![alt text](image-6.png)
+
+
+These functions will enable us to retrieve the NFTs owned by the principal. Once identified, implement these functions to populate our total array of NFTs, named "allNFT".
 
 It's important to note that ICSscan will be instrumental in searching for and comprehending the relevant functions in the IDLs.
 
