@@ -106,7 +106,7 @@ export const canisterIds = [
 ];
 
 ```
-## Step 5: Deploy 
+## Step 3: Deploy 
 Make sure you are in the right repository "/template-unity-ic"
 ```bash
 dfx deploy --network ic 
