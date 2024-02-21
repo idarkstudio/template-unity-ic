@@ -30,7 +30,7 @@ const useNfts = () => {
         .filter(
           (a) =>
             a[1] ===
-            principalToAccount("7k2y4-qc3vg-2vxna-w5l5q-2uyvk-k4sac-ok22o-5biad-ysjho-njg2i-jqe")
+            principalToAccount(principal)
         )
         .map((a) => a[0]);
       console.log({ tokensId });
