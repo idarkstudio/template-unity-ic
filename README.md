@@ -74,8 +74,8 @@ const client = createClient({
   globalProviderConfig: {
     whitelist: canisterIds,
     appName: "",
-    // host: "https://ecajd-kiaaa-aaaam-ab7jq-cai.icp0.io/",this would be mine 
-    host: "https://.icp0.io/",// put your id in the middle of "https://" and ".icp0"
+    // host: "https://ecajd-kiaaa-aaaam-ab7jq-cai.icp0.io/", // this would be mine 
+    host: "https://"YOUR_CANISTER_ID".icp0.io/",// put your id in the middle of "https://" and ".icp0"
     dev: false,
     autoConnect: false,
   },
@@ -97,12 +97,12 @@ Put your id of your canister users:
 import idlUsers from "./idls/Users";
 
 export const canisters = {
-  db_users: { canisterId: "", idlFactory: idlUsers }// put your canister_id
+  db_users: { canisterId: "YOUR_CANISTER_ID", idlFactory: idlUsers }
 
 };
 
 export const canisterIds = [
-  "" // put your canister_id
+  "YOUR_CANISTER_ID"
 ];
 
 ```
