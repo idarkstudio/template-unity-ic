@@ -8,11 +8,29 @@ This README provides the necessary steps to set up the project. Follow these ins
 ## Step 1: Configure Unity Build Settings
 
 ### A. Locate the app.jsx File
-The first subtask is to locate the `app.jsx` file in our project. This file is essential for configuring the application.
+The first subtask is to locate the [`app.jsx`](./src/frontend/src/App.jsx) file in our project. This file is essential for configuring the application.
+```bash 
+src
+└── frontend
+    └── src
+        └── App.jsx
+```
 
 ### B. Configure the Unity Build URL
 Within the `app.jsx` file, locate the variables responsible for fetching the Unity build. These variables can be configured to fetch the build from either a server or an asset canister. It is important to ensure that the URL directory is correct.
+```js
+const URL = ""; // Unity files URL
 
+const unityOptions = {
+  loaderUrl: URL + "/.js",
+  dataUrl: URL + "/.data",
+  frameworkUrl: URL + "/.framework.js",
+  codeUrl: URL + "/.wasm",
+  productName: "sdk_test",
+  productVersion: "0.0.1",
+  companyName: "test-sdk",
+};
+```
 ### C. Ensure File Names Match
 It is essential that the file names of the Unity build match the location specified in the URL directory. This will ensure that the application can properly load the build.
 
@@ -20,7 +38,7 @@ It is essential that the file names of the Unity build match the location specif
 For example, in this case, you should have a folder in your domain called "Unity-build" and then the names of the files should match those in your code.
 
 
-## step 4: Add your canisters Id in the proyect.
+## step 2: Add your canisters Id in the proyect.
 
 # A- First, you need to create your frontend canister because you require the canister ID before deployment:
  ```bash
@@ -74,7 +92,7 @@ src
         └── utils
             └── canisters.js
 ```
-put your id of your canister users 
+Put your id of your canister users:
 ```js 
 import idlUsers from "./idls/Users";
 

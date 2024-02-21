@@ -65,7 +65,6 @@ export const canisters = {
 export const canisterIds = [
   "mqblk-2aaaa-aaaam-ab64a-cai", // db_users
   "5btbh-2aaaa-aaaap-aaqga-cai" // genesis collection
-
 ];
  ```
 

@@ -12,9 +12,6 @@ To learn more before you start working with loader, see the following documentat
 - [Motoko Language Quick Reference](https://internetcomputer.org/docs/current/references/motoko-ref/)
 - [JavaScript API Reference](https://erxue-5aaaa-aaaab-qaagq-cai.raw.icp0.io)
 
-- [Link your build](./Docs/QuickStart.md)
-
-
 If you want to start working on your project right away, you might want to try the following commands:
 
 ```bash
