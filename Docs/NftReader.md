@@ -7,7 +7,7 @@ Firstly, it's important to note that NFTs don't follow the same standard. Theref
 Navigate to [NftGeek](https://t5t44-naaaa-aaaah-qcutq-cai.raw.ic0.app), search the specific collection of the nft that you want and save the canister id.
 
 for example if I want "the genesis collection" I Would search: 
-[alt text](image-2.png)
+![alt text](image-2.png)
 In my case the canister id of this collection is : 
 ```bash
 5btbh-2aaaa-aaaap-aaqga-cai 
@@ -16,11 +16,11 @@ In my case the canister id of this collection is :
 ## Step 2: Get the idl file.
 
 ### A- Go to [IcScan](https://icscan.io) and search the canister Id from your collection.
-[alt text](image-3.png)
+![alt text](image-3.png)
 ### B-Once you search it scroll down and search the "View Did File".
-[alt text](image-4.png)
+![alt text](image-4.png)
 ### C-Select JavaScript and coppy the code.
-[alt text](image-5.png)
+![alt text](image-5.png)
 ### D- Add the code to a new idl file.
 Create a new file and coppy the script
 ``` bash
