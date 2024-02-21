@@ -111,3 +111,5 @@ Make sure you are in the right repository "/template-unity-ic"
 ```bash
 dfx deploy --network ic 
 ``` 
+
+## Coming soon, the template will feature token reading capabilities and the option to change the name in the database.
