@@ -3,11 +3,24 @@
 ### Introduction:
 Firstly, it's important to note that NFTs don't follow the same standard. Therefore, we'll need two things: knowing the IDLs of the specific NFT and identifying which functions of the canister are relevant. To address both aspects, we will use ICSscan.
 
-## Step 1:
-Navigate to ![IcScan](https://icscan.io) and obtain the IDLs. Add them to the "idls" folder.
+## Step 1: Get the canister id .
+Navigate to ![NftGeek](https://t5t44-naaaa-aaaah-qcutq-cai.raw.ic0.app), search the specific collection of the nft that you want and save the canister id.
 
-## Step 2:
-Add our canister ID to the "canisters" file. In the "linked" object, include the IDLFactory with our IDLs ![folder](../src/frontend/src/utils/idls/Users.js).
+for example if I want "the genesis collection" I Would search: 
+![alt text](image-2.png)
+In my case the canister id of this collection is : 
+```bash
+5btbh-2aaaa-aaaap-aaqga-cai 
+```
+## Step 2: Get the idl file.
+# A- Go to [IcScan](https://icscan.io) and search the canister Id from your collection.
+![alt text](image-3.png)
+# B-Once you search it scroll down and search the "View Did File".
+![alt text](image-4.png)
+# C-Select JavaScript and coppy the code.
+![alt text](image-5.png)
+# D- Add the code to a new idl file.
+Create a new file and coppy the script
 ``` bash
 src
 └── frontend
@@ -15,8 +28,45 @@ src
         └── utils
             └── idls
                 ├── Users.js
-                └── Yumi.js
+                └── Genesis.js // my new file 
 ```
+
+## Step 3: Add your Canister Id and the idl properties.
+
+
+# A- Go to the![canisters file](../src/frontend/src/utils/canisters.js).
+``` bash
+src
+└── frontend
+    └── src
+        └── utils
+            └── canisters.js
+```
+# B- Link your idl file
+Import your idl in like this
+```js
+import myIdl from "./idls/myCollection";
+ ```
+# C- Add your canister ID
+Add the id in the "canisterIds" and create a new Object in "canisters" with the your id
+# D- Add your idlFactory
+Add "myIdl" like the value of a key called "idlFactory"
+```js
+import idlUsers from "./idls/Users";
+import IdlGenesis from "./idls/Genesis";
+
+export const canisters = {
+  db_users: { canisterId: "mqblk-2aaaa-aaaam-ab64a-cai", idlFactory: idlUsers },// db_users
+  genesis: { canisterId: "5btbh-2aaaa-aaaap-aaqga-cai", idlFactory: IdlGenesis }, // genesis collection
+
+};
+
+export const canisterIds = [
+  "mqblk-2aaaa-aaaam-ab64a-cai", // db_users
+  "5btbh-2aaaa-aaaap-aaqga-cai" // genesis collection
+
+];
+ ```
 
 ## Step 3
 
