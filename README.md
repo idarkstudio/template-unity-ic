@@ -1,72 +1,95 @@
-# Loader
 
-Welcome to your new loader project and to the internet computer development community. By default, creating a new project adds this README and some template files to your project directory. You can edit these template files to customize your project and to include your own code to speed up the development cycle.
+### Project Setup Instructions
+This README provides the necessary steps to set up the project. Follow these instructions to ensure the configuration is done correctly for the entire project.
 
-To get started, you might want to explore the project directory structure and the default configuration file. Working with this project in your development environment will not affect any production deployment or identity tokens.
-
-To learn more before you start working with loader, see the following documentation available online:
-
-- [Quick Start](https://internetcomputer.org/docs/current/developer-docs/quickstart/hello10mins)
-- [SDK Developer Tools](https://internetcomputer.org/docs/current/developer-docs/build/install-upgrade-remove)
-- [Motoko Programming Language Guide](https://internetcomputer.org/docs/current/developer-docs/build/cdks/motoko-dfinity/motoko/)
-- [Motoko Language Quick Reference](https://internetcomputer.org/docs/current/references/motoko-ref/)
-- [JavaScript API Reference](https://erxue-5aaaa-aaaab-qaagq-cai.raw.icp0.io)
-
-- [Link your build](./Docs/QuickStart.md)
 - [How to configure the reeading of nfts](./Docs/NftReader.md)
+- [Docs about ic enviromment ](./Docs/IcDocs.md)
 
-If you want to start working on your project right away, you might want to try the following commands:
+## Step 1: Configure Unity Build Settings
 
+### A. Locate the app.jsx File
+The first subtask is to locate the `app.jsx` file in our project. This file is essential for configuring the application.
+
+### B. Configure the Unity Build URL
+Within the `app.jsx` file, locate the variables responsible for fetching the Unity build. These variables can be configured to fetch the build from either a server or an asset canister. It is important to ensure that the URL directory is correct.
+
+### C. Ensure File Names Match
+It is essential that the file names of the Unity build match the location specified in the URL directory. This will ensure that the application can properly load the build.
+
+![files names](image.png)
+For example, in this case, you should have a folder in your domain called "Unity-build" and then the names of the files should match those in your code.
+
+
+## step 4: Add your canisters Id in the proyect.
+
+# A- First, you need to create your frontend canister because you require the canister ID before deployment:
+ ```bash
+ dfx canister create frontend --network ic 
+  ``` 
 ```bash
-cd template-unity-ic/
-dfx help
-dfx canister --help
+dfx canister create users --network ic 
+``` 
+(make sure that your canisters names are the same)
+
+This command will return something like this: "ecajd-kiaaa-aaaam-ab7jq-cai".Also this will generate a fil ".json" like this 
+![canister_ids.json](image-1.png)
+this file will be like this:
+```json
+{
+  "frontend": {
+    "ic": "ecajd-kiaaa-aaaam-ab7jq-cai"
+  },
+  "users":{
+    "ic":"mqblk-2aaaa-aaaam-ab64a-cai"
+  }
+}
+
+``` 
+ Make sure to save your IDs.
+
+# B- Insert your Frontend.
+Go to the ![Index](../src/frontend/src/index.jsx) and change the Const Client with your id
+```js 
+const client = createClient({
+  canisters,
+  providers: defaultProviders,
+  globalProviderConfig: {
+    whitelist: canisterIds,
+    appName: "",
+    // host: "https://ecajd-kiaaa-aaaam-ab7jq-cai.icp0.io/",this would be mine 
+    host: "https://.icp0.io/",// put your id in the middle of "https://" and ".icp0"
+    dev: false,
+    autoConnect: false,
+  },
+});
 ```
+This will enable you to execute some POST methods on the Mainnet.
 
-## Running the project locally
+# C- Insert your DataBase.
+Go to the ![canisters file](../src/frontend/src/utils/canisters.js).
+``` bash
+src
+└── frontend
+    └── src
+        └── utils
+            └── canisters.js
+```
+put your id of your canister users 
+```js 
+import idlUsers from "./idls/Users";
 
-If you want to test your project locally, you can use the following commands:
+export const canisters = {
+  db_users: { canisterId: "", idlFactory: idlUsers }// put your canister_id
 
+};
+
+export const canisterIds = [
+  "" // put your canister_id
+];
+
+```
+## Step 5: Deploy 
+Make sure you are in the right repository "/template-unity-ic"
 ```bash
-# Starts the replica, running in the background
-dfx start --background
-
-# Deploys your canisters to the replica and generates your candid interface
-dfx deploy
-```
-
-Once the job completes, your application will be available at `http://localhost:4943?canisterId={asset_canister_id}`.
-
-If you have made changes to your backend canister, you can generate a new candid interface with
-
-```bash
-npm run generate
-```
-
-at any time. This is recommended before starting the frontend development server, and will be run automatically any time you run `dfx deploy`.
-
-If you are making frontend changes, you can start a development server with
-
-```bash
-npm start
-```
-
-Which will start a server at `http://localhost:8080`, proxying API requests to the replica at port 4943.
-
-## Configuring the project
-By default, the loader will not load, that's because the target URL is set to nothing, so it has nothing to load to, to make it load to the desired URL, simply modify the URL variable located on the App.jsx file (Line 12).
-
-```bash
-const URL = "{YOUR_URL_HERE}"
-```
-
-
-### Note on frontend environment variables
-
-If you are hosting frontend code somewhere without using DFX, you may need to make one of the following adjustments to ensure your project does not fetch the root key in production:
-
-- set`DFX_NETWORK` to `ic` if you are using Webpack
-- use your own preferred method to replace `process.env.DFX_NETWORK` in the autogenerated declarations
-  - Setting `canisters -> {asset_canister_id} -> declarations -> env_override to a string` in `dfx.json` will replace `process.env.DFX_NETWORK` with the string in the autogenerated declarations
-- Write your own `createActor` constructor
-
+dfx deploy --network ic 
+``` 

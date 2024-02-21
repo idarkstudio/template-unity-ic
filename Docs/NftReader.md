@@ -1,6 +1,6 @@
 
 
-### Introduction:
+# Introduction:
 Firstly, it's important to note that NFTs don't follow the same standard. Therefore, we'll need two things: knowing the IDLs of the specific NFT and identifying which functions of the canister are relevant. To address both aspects, we will use ICSscan.
 
 ## Step 1: Get the canister id .
@@ -13,13 +13,14 @@ In my case the canister id of this collection is :
 5btbh-2aaaa-aaaap-aaqga-cai 
 ```
 ## Step 2: Get the idl file.
-# A- Go to [IcScan](https://icscan.io) and search the canister Id from your collection.
+
+### A- Go to [IcScan](https://icscan.io) and search the canister Id from your collection.
 ![alt text](image-3.png)
-# B-Once you search it scroll down and search the "View Did File".
+### B-Once you search it scroll down and search the "View Did File".
 ![alt text](image-4.png)
-# C-Select JavaScript and coppy the code.
+### C-Select JavaScript and coppy the code.
 ![alt text](image-5.png)
-# D- Add the code to a new idl file.
+### D- Add the code to a new idl file.
 Create a new file and coppy the script
 ``` bash
 src
@@ -34,7 +35,7 @@ src
 ## Step 3: Add your Canister Id and the idl properties.
 
 
-# A- Go to the![canisters file](../src/frontend/src/utils/canisters.js).
+### A- Go to the![canisters file](../src/frontend/src/utils/canisters.js).
 ``` bash
 src
 └── frontend
@@ -42,14 +43,14 @@ src
         └── utils
             └── canisters.js
 ```
-# B- Link your idl file
+### B- Link your idl file
 Import your idl in like this
 ```js
 import myIdl from "./idls/myCollection";
  ```
-# C- Add your canister ID
+### C- Add your canister ID
 Add the id in the "canisterIds" and create a new Object in "canisters" with the your id
-# D- Add your idlFactory
+### D- Add your idlFactory
 Add "myIdl" like the value of a key called "idlFactory"
 ```js
 import idlUsers from "./idls/Users";
